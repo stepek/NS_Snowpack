@@ -1,3 +1,1 @@
-module.exports = {
-  ...require("@snowpack/app-scripts-react/jest.config.js")(),
-}
+import "@testing-library/jest-dom/extend-expect"
