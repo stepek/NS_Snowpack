@@ -12,6 +12,9 @@ module.exports = {
     "@snowpack/plugin-react-refresh",
     "@snowpack/plugin-dotenv",
   ],
+  alias: {
+    "redux-duck": "redux-duck/dist",
+  },
   packageOptions: {},
   devOptions: {},
   buildOptions: {
