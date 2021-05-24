@@ -10,11 +10,7 @@ export interface AuthState {
 
 export const reducer = duck.createReducer<AuthState>(
   {
-    [LOGIN]: (state, action) => {
-      if (action === undefined) {
-        return state
-      }
-
+    [LOGIN]: state => {
       return {
         ...state,
         error: undefined,
@@ -22,12 +18,9 @@ export const reducer = duck.createReducer<AuthState>(
       }
     },
     [LOGIN_DONE]: (state, action) => {
-      if (action === undefined) {
-        return state
-      }
-      const payload = action.payload as unknown as LoginDonePayload
+      const payload = action?.payload as unknown as LoginDonePayload
 
-      if (action.error === true) {
+      if (action?.error === true) {
         return {
           error: payload.error,
           userName: payload.username,
