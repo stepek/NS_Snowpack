@@ -21,3 +21,12 @@ export const getErrorMessage = createSelector<
   state => getState(state).error,
   error => (error ? parseError(error) : null),
 )
+
+export const getAuthorizedState = createSelector<
+  AppState,
+  string | undefined,
+  boolean
+>(
+  state => getState(state).token,
+  token => Boolean(token),
+)

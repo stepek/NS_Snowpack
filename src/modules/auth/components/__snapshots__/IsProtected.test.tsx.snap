@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IsProtected> render correctly for authorized component 1`] = `
+<div>
+  Hidden component
+</div>
+`;
+
+exports[`<IsProtected> render correctly for non authorized 1`] = `
+<div>
+  LoginComponent
+</div>
+`;

@@ -1,4 +1,4 @@
-import {getErrorMessage} from "./selectors"
+import {getAuthorizedState, getErrorMessage} from "./selectors"
 
 test("getErrorMessage return parsed error", () => {
   const mockStateCorrectError = {
@@ -22,4 +22,13 @@ test("getErrorMessage return null when no error", () => {
     auth: {},
   }
   expect(getErrorMessage(mockState)).toEqual(null)
+})
+
+test("getAuthorizedState return authorized state", () => {
+  const mockState = {
+    auth: {
+      token: "1234Token",
+    },
+  }
+  expect(getAuthorizedState(mockState)).toEqual(true)
 })

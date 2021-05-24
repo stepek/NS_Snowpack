@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Login> render correctly 1`] = `
+Array [
+  <input
+    onChange={[Function]}
+    placeholder="User Name"
+    value=""
+  />,
+  <input
+    onChange={[Function]}
+    placeholder="Password"
+    value=""
+  />,
+  <button
+    onClick={[Function]}
+  >
+    Login
+  </button>,
+]
+`;
+
+exports[`<Login> render correctly with error 1`] = `
+Array [
+  <span>
+    The username or password is incorrect.
+  </span>,
+  <input
+    onChange={[Function]}
+    placeholder="User Name"
+    value=""
+  />,
+  <input
+    onChange={[Function]}
+    placeholder="Password"
+    value=""
+  />,
+  <button
+    onClick={[Function]}
+  >
+    Login
+  </button>,
+]
+`;
+
+exports[`<Login> render correctly with unknown error 1`] = `
+Array [
+  <span>
+    unknown error
+  </span>,
+  <input
+    onChange={[Function]}
+    placeholder="User Name"
+    value=""
+  />,
+  <input
+    onChange={[Function]}
+    placeholder="Password"
+    value=""
+  />,
+  <button
+    onClick={[Function]}
+  >
+    Login
+  </button>,
+]
+`;

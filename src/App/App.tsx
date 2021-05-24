@@ -1,7 +1,7 @@
 import React from "react"
 import {Provider} from "react-redux"
 
-import {Login} from "../modules/auth"
+import {IsProtected} from "../modules/auth"
 import {createStore} from "../modules/createStore"
 
 export function App() {
@@ -9,7 +9,9 @@ export function App() {
 
   return (
     <Provider store={store}>
-      <Login />
+      <IsProtected>
+        <div>protectedContent</div>
+      </IsProtected>
     </Provider>
   )
 }

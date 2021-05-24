@@ -1,9 +1,7 @@
 import React, {useCallback, useState} from "react"
 import {useDispatch, useSelector} from "react-redux"
 
-import Button from "../../../components/Button"
-import TextField from "../../../components/TextField"
-import Typography from "../../../components/Typography"
+import {Button, TextField, Typography} from "../../../components"
 import {loginAction} from "../authDuck/actions"
 import {getErrorMessage} from "../authDuck/selectors"
 
@@ -43,3 +41,5 @@ export function Login() {
     </>
   )
 }
+
+export default Login
