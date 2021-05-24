@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TextField> render correctly 1`] = `
+<input
+  onChange={[Function]}
+/>
+`;
+
+exports[`<TextField> render correctly 2`] = `
+<input
+  onChange={[Function]}
+  placeholder="FooBarBaz"
+/>
+`;
+
+exports[`<TextField> render correctly 3`] = `
+<input
+  onChange={[Function]}
+  value="Foo"
+/>
+`;
