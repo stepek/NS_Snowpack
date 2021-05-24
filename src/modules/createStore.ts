@@ -6,12 +6,16 @@ import {
 import {composeWithDevTools} from "redux-devtools-extension"
 import thunk from "redux-thunk"
 
+import {reducer as authReducer} from "./auth"
+
 function isDebug() {
   return import.meta.env.NODE_ENV === "development"
 }
 
 function createRootReducer() {
-  return combineReducers({})
+  return combineReducers({
+    auth: authReducer,
+  })
 }
 
 export function createStore() {
@@ -19,5 +23,5 @@ export function createStore() {
     ? composeWithDevTools(applyMiddleware(thunk))
     : applyMiddleware(thunk)
 
-  return _createStore(createRootReducer, {}, middlewares)
+  return _createStore(createRootReducer(), {}, middlewares)
 }

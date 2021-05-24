@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App> 1`] = `
+Array [
+  <input
+    onChange={[Function]}
+    placeholder="User Name"
+    value=""
+  />,
+  <input
+    onChange={[Function]}
+    placeholder="Password"
+    value=""
+  />,
+  <button
+    onClick={[Function]}
+  >
+    Login
+  </button>,
+]
+`;

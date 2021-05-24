@@ -1,4 +1,4 @@
-import {LOGIN_DONE} from "./actionTypes"
+import {LOGIN, LOGIN_DONE} from "./actionTypes"
 import duck from "./duck"
 
 export interface LoginDonePayload {
@@ -7,11 +7,14 @@ export interface LoginDonePayload {
   error?: string
 }
 
+const login = duck.createAction<void>(LOGIN)
 const loginSuccess = duck.createAction<LoginDonePayload>(LOGIN_DONE)
 const loginFailure = duck.createAction<LoginDonePayload>(LOGIN_DONE, true)
 
 export function loginAction(username: string, password: string) {
   return async dispatch => {
+    dispatch(login())
+
     await fetch("https://playground.tesonet.lt/v1/tokens", {
       method: "POST",
       headers: {
@@ -19,14 +22,24 @@ export function loginAction(username: string, password: string) {
       },
       body: JSON.stringify({username: username, password}),
     })
-      .then(body => body.json())
-      .then(data => {
-        dispatch(
-          loginSuccess({
-            username: username,
-            token: data.token,
-          }),
-        )
+      .then(async res => {
+        const data = await res.json()
+
+        if (res.status === 200) {
+          dispatch(
+            loginSuccess({
+              username: username,
+              token: data.token,
+            }),
+          )
+        } else {
+          dispatch(
+            loginFailure({
+              username: username,
+              error: data.message,
+            }),
+          )
+        }
       })
       .catch(error => {
         dispatch(

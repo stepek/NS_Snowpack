@@ -1,6 +1,6 @@
 import fetchMock from "fetch-mock"
 
-import {LOGIN_DONE} from "./actionTypes"
+import {LOGIN, LOGIN_DONE} from "./actionTypes"
 import {loginAction} from "./actions"
 
 afterEach(() => {
@@ -18,7 +18,12 @@ test("return success action", async () => {
 
   await loginAction("john", "epic_password")(dispatch)
 
-  expect(dispatch).toBeCalledWith({
+  expect(dispatch).toBeCalledTimes(2)
+  expect(dispatch).nthCalledWith(1, {
+    error: false,
+    type: LOGIN,
+  })
+  expect(dispatch).nthCalledWith(2, {
     error: false,
     payload: {
       token: "foo_bar_baz_bas",
@@ -28,20 +33,49 @@ test("return success action", async () => {
   })
 })
 
-test("return failure action", async () => {
+test("return failure action when server returns error", async () => {
   const dispatch = jest.fn()
 
   fetchMock.postOnce("https://playground.tesonet.lt/v1/tokens", {
     status: 401,
-    throws: {message: "Unauthorized"},
+    body: {message: "Unauthorized"},
   })
 
   await loginAction("john", "epic_password")(dispatch)
 
-  expect(dispatch).toBeCalledWith({
+  expect(dispatch).toBeCalledTimes(2)
+  expect(dispatch).nthCalledWith(1, {
+    error: false,
+    type: LOGIN,
+  })
+  expect(dispatch).nthCalledWith(2, {
     error: true,
     payload: {
       error: "Unauthorized",
+      username: "john",
+    },
+    type: LOGIN_DONE,
+  })
+})
+
+test("return failure action when some internet connection or other internet issue ", async () => {
+  const dispatch = jest.fn()
+
+  fetchMock.postOnce("https://playground.tesonet.lt/v1/tokens", {
+    throws: {message: "ERROR!"},
+  })
+
+  await loginAction("john", "epic_password")(dispatch)
+
+  expect(dispatch).toBeCalledTimes(2)
+  expect(dispatch).nthCalledWith(1, {
+    error: false,
+    type: LOGIN,
+  })
+  expect(dispatch).nthCalledWith(2, {
+    error: true,
+    payload: {
+      error: "ERROR!",
       username: "john",
     },
     type: LOGIN_DONE,
