@@ -7,11 +7,15 @@ import {composeWithDevTools} from "redux-devtools-extension"
 import thunk from "redux-thunk"
 
 import {reducer as authReducer} from "./auth"
+import {AuthState} from "./auth/authDuck/reducer"
 
 function isDebug() {
   return import.meta.env.NODE_ENV === "development"
 }
 
+export interface AppState {
+  auth: AuthState
+}
 function createRootReducer() {
   return combineReducers({
     auth: authReducer,

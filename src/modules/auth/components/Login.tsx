@@ -1,14 +1,24 @@
 import React, {useCallback, useState} from "react"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 
 import Button from "../../../components/Button"
 import TextField from "../../../components/TextField"
+import Typography from "../../../components/Typography"
 import {loginAction} from "../authDuck/actions"
+import {getErrorMessage} from "../authDuck/selectors"
+
+function parseLoginError(error: string): string {
+  if (error === "Unauthorized") {
+    return "The username or password is incorrect."
+  }
+  return error
+}
 
 export function Login() {
   const dispatch = useDispatch()
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const errorMessage = useSelector(getErrorMessage)
 
   const handleLoginClick = useCallback(() => {
     dispatch(loginAction(username, password))
@@ -16,6 +26,9 @@ export function Login() {
 
   return (
     <>
+      {errorMessage !== null && (
+        <Typography>{parseLoginError(errorMessage)}</Typography>
+      )}
       <TextField
         placeholder={"User Name"}
         value={username}
