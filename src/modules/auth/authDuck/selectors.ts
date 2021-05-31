@@ -30,3 +30,6 @@ export const getAuthorizedState = createSelector<
   state => getState(state).token,
   token => Boolean(token),
 )
+
+export const getToken = (state: AppState): string | undefined =>
+  getState(state).token

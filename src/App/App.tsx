@@ -3,6 +3,7 @@ import {Provider} from "react-redux"
 
 import {IsProtected} from "../modules/auth"
 import {createStore} from "../modules/createStore"
+import ServerList from "../modules/servers/serverList"
 
 export function App() {
   const store = createStore()
@@ -10,7 +11,7 @@ export function App() {
   return (
     <Provider store={store}>
       <IsProtected>
-        <div>protectedContent</div>
+        <ServerList />
       </IsProtected>
     </Provider>
   )
